@@ -13,8 +13,8 @@ var killfile *os.File
 
 func WriteKillFile() {
 	killfile.WriteString(fmt.Sprintln("#!/bin/bash"))
-	killfile.WriteString(fmt.Sprintf("sudo kill %d \n", os.Getpid()))
-	killfile.WriteString(fmt.Sprintln("sudo rm pid"))
+	killfile.WriteString(fmt.Sprintf("kill %d \n", os.Getpid()))
+	killfile.WriteString(fmt.Sprintln("rm pid"))
 	killfile.Close()
 }
 func ReadLogFile(f string) string {
