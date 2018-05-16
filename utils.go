@@ -9,14 +9,7 @@ import (
 )
 
 var logfile *os.File
-var killfile *os.File
 
-func WriteKillFile() {
-	killfile.WriteString(fmt.Sprintln("#!/bin/bash"))
-	killfile.WriteString(fmt.Sprintf("kill %d \n", os.Getpid()))
-	killfile.WriteString(fmt.Sprintln("rm pid"))
-	killfile.Close()
-}
 func ReadLogFile(f string) string {
 	b, err := ioutil.ReadFile(f)
 	checkErr(err)
@@ -44,5 +37,4 @@ func checkRoot() error {
 }
 func init() {
 	logfile = OpenFile(conf.GetString("key_log_file"))
-	killfile = OpenFile("kill.sh")
 }

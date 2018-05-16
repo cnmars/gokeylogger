@@ -4,7 +4,6 @@
 *.so
 log
 keylog
-kill.sh
 gokeylogger
 conf.toml
 # Folders

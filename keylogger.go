@@ -25,7 +25,6 @@ func NewDevices() ([]*InputDevice, error) {
 	}
 	return ret, nil
 }
-
 func newInputDeviceReader(buff []byte, id int) *InputDevice {
 	rd := bufio.NewReader(bytes.NewReader(buff))
 	rd.ReadLine()
@@ -37,13 +36,11 @@ func newInputDeviceReader(buff []byte, id int) *InputDevice {
 		Name: name[1],
 	}
 }
-
 func NewKeyLogger(dev *InputDevice) *KeyLogger {
 	return &KeyLogger{
 		dev: dev,
 	}
 }
-
 func (t *KeyLogger) Read() error {
 
 	ret = make(chanInputEvent, 512)
@@ -79,7 +76,6 @@ func (t *KeyLogger) Read() error {
 	}()
 	return nil
 }
-
 func (t *InputEvent) KeyString(shift,caps bool) string {
 	if shift {
 		return keyCodeMapShift[t.Code]

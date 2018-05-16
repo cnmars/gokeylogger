@@ -21,7 +21,6 @@ func main() {
 	}
 	defer ctx.Release()
 	log.Println(os.Getpid())
-	WriteKillFile()
 	RunKeyLogger()
 }
 
@@ -35,5 +34,4 @@ func init() {
 		Umask:       027,
 	}
 	logfile = OpenFile(conf.GetString("key_log_file"))
-	killfile = OpenFile("kill.sh")
 }
