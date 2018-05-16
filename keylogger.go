@@ -8,19 +8,14 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"os/user"
 	"strings"
 )
 
 var ret chanInputEvent
 
 func NewDevices() ([]*InputDevice, error) {
+
 	var ret []*InputDevice
-
-	if err := checkRoot(); err != nil {
-		return ret, err
-	}
-
 	for i := 0; i < MAX_FILES; i++ {
 		buff, err := ioutil.ReadFile(fmt.Sprintf(INPUTS, i))
 		if err != nil {
@@ -28,7 +23,6 @@ func NewDevices() ([]*InputDevice, error) {
 		}
 		ret = append(ret, newInputDeviceReader(buff, i))
 	}
-
 	return ret, nil
 }
 
@@ -96,13 +90,3 @@ func (t *InputEvent) KeyString(shift,caps bool) string {
 	}
 }
 
-func checkRoot() error {
-	u, err := user.Current()
-	if err != nil {
-		return err
-	}
-	if u.Uid != "0" {
-		return fmt.Errorf("Cannot read device files. Are you running as root?")
-	}
-	return nil
-}

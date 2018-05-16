@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -10,6 +11,9 @@ import (
 var ctx *daemon.Context
 
 func main() {
+	if err := checkRoot(); err != nil {
+		fmt.Println(err)
+	}
 	d, err := ctx.Reborn()
 	if err != nil {
 		log.Fatal("Unable to run: ", err)

@@ -1,0 +1,9 @@
+language: go
+matrix:
+  include:
+    - go: 1.10
+
+install: true
+
+script:
+  - go get -t -v ./...

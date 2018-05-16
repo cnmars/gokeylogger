@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"os/user"
 )
 
 var logfile *os.File
@@ -14,7 +15,6 @@ func WriteKillFile() {
 	killfile.WriteString(fmt.Sprintln("#!/bin/bash"))
 	killfile.WriteString(fmt.Sprintf("sudo kill %d \n", os.Getpid()))
 	killfile.WriteString(fmt.Sprintln("sudo rm pid"))
-	killfile.Sync()
 	killfile.Close()
 }
 func ReadLogFile(f string) string {
@@ -31,6 +31,16 @@ func checkErr(err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+func checkRoot() error {
+	u, err := user.Current()
+	if err != nil {
+		return err
+	}
+	if u.Uid != "0" {
+		return fmt.Errorf("Cannot read device files. Are you running as root?")
+	}
+	return nil
 }
 func init() {
 	logfile = OpenFile(conf.GetString("key_log_file"))

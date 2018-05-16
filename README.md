@@ -1,7 +1,7 @@
 keylogger golang
 
-install : 
+install : go get -u -v github.com/mehrati/gokeylogger
 
-run : 
+run : gokeylogger
 
-kill : ./kill.sh
+kill : ./kill.sh or kill $(cat pid)
