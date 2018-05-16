@@ -5,7 +5,7 @@
 log
 keylog
 gokeylogger
-conf.toml
+pid
 # Folders
 _obj
 _test

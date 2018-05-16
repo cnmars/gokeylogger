@@ -35,6 +35,4 @@ func checkRoot() error {
 	}
 	return nil
 }
-func init() {
-	logfile = OpenFile(conf.GetString("key_log_file"))
-}
+

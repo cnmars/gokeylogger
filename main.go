@@ -13,9 +13,7 @@ func main() {
 	err := checkRoot()
 	checkErr(err)
 	d, err := ctx.Reborn()
-	if err != nil {
-		log.Fatal("Unable to run: ", err)
-	}
+	checkErr(err)
 	if d != nil {
 		return
 	}
@@ -23,15 +21,14 @@ func main() {
 	log.Println(os.Getpid())
 	RunKeyLogger()
 }
-
 func init() {
 	ctx = &daemon.Context{
-		PidFileName: conf.GetString("pid_file"),
+		PidFileName: "pid",
 		PidFilePerm: 0755,
-		LogFileName: conf.GetString("log_file"),
+		LogFileName: "log",
 		LogFilePerm: 0755,
 		WorkDir:     "./",
 		Umask:       027,
 	}
-	logfile = OpenFile(conf.GetString("key_log_file"))
+	logfile = OpenFile("keylog")
 }

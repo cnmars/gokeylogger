@@ -11,10 +11,7 @@ func init() {
 	conf.SetConfigType("toml")
 	conf.SetConfigName("conf")
 	conf.AddConfigPath(".")
-	// conf.Set("key_log_file", "keylog")
-	// conf.Set("log_file", "log")
-	// conf.Set("pid_file", "pid")
-	// conf.Set("cron_time", "@every 60s") // send mail every 60 second
+	// conf.Set("cron_duration", "@every 60s") // send mail every 60 second
 	// conf.Set("host_mail", "hostmail")
 	// conf.Set("port_mail", 587)
 	// conf.Set("user_mail", "user mail")

