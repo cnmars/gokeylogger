@@ -54,7 +54,6 @@ func getKeyboardID() int {
 		for _, val := range devs {
 			if strings.Contains(strings.ToLower(val.Name), "keyboard") {
 				fmt.Println("Id->", val.Id, "Device->", val.Name)
-				keymap[val.Id] = val.Name
 			}
 		}
 		fmt.Println("Exit ...")
