@@ -1,11 +1,13 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"os/user"
+	"strings"
 )
 
 var logfile *os.File
@@ -36,3 +38,38 @@ func checkRoot() error {
 	return nil
 }
 
+func getKeyboardID() int {
+	var id int
+	flag.IntVar(&id, "kbid", -1, "keyboard id required")
+	flag.Parse()
+	devs, err := NewDevices()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	keymap := map[int]string{}
+	if id == -1 {
+		fmt.Println("You must select one keyboard !")
+		fmt.Println("Please run keylogger with option --kbid [id number] ")
+		for _, val := range devs {
+			if strings.Contains(strings.ToLower(val.Name), "keyboard") {
+				fmt.Println("Id->", val.Id, "Device->", val.Name)
+				keymap[val.Id] = val.Name
+			}
+		}
+		fmt.Println("Exit ...")
+		os.Exit(1)
+	} else {
+		for _, val := range devs {
+			if strings.Contains(strings.ToLower(val.Name), "keyboard") {
+				keymap[val.Id] = val.Name
+			}
+		}
+	}
+	if _, ok := keymap[id]; !ok {
+		fmt.Println("Wrong id ...")
+		os.Exit(1)
+	}
+
+	return id
+}

