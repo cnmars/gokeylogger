@@ -27,5 +27,4 @@ TryToSend:
 		goto TryToSend
 	}
 	log.Println("Send mail...")
-	close(sendMailDone)
 }
