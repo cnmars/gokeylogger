@@ -11,7 +11,6 @@ var ctx *daemon.Context
 var kbid int
 
 func main() {
-
 	err := checkRoot()
 	checkErr(err)
 	child, err := ctx.Reborn()

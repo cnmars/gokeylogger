@@ -11,10 +11,9 @@ import (
 	"strings"
 )
 
-var ret chanInputEvent
+var chie chanInputEvent
 
 func NewDevices() ([]*InputDevice, error) {
-
 	var ret []*InputDevice
 	for i := 0; i < MAX_FILES; i++ {
 		buff, err := ioutil.ReadFile(fmt.Sprintf(INPUTS, i))
@@ -43,15 +42,15 @@ func NewKeyLogger(dev *InputDevice) *KeyLogger {
 }
 func (t *KeyLogger) Read() error {
 
-	ret = make(chanInputEvent, 512)
+	chie = make(chanInputEvent, 512)
 	if err := checkRoot(); err != nil {
-		close(ret)
+		close(chie)
 		return err
 	}
 
 	fd, err := os.Open(fmt.Sprintf(DEVICE_FILE, t.dev.Id))
 	if err != nil {
-		close(ret)
+		close(chie)
 		return fmt.Errorf("Error opening device file: %s ", err.Error())
 	}
 	go func() {
@@ -60,7 +59,7 @@ func (t *KeyLogger) Read() error {
 			event := InputEvent{}
 			n, err := fd.Read(tmp)
 			if err != nil {
-				close(ret)
+				close(chie)
 				log.Fatal(err)
 			}
 			if n <= 0 {
@@ -68,10 +67,10 @@ func (t *KeyLogger) Read() error {
 			}
 			err = binary.Read(bytes.NewBuffer(tmp), binary.LittleEndian, &event)
 			if err != nil {
-				close(ret)
+				close(chie)
 				log.Fatal(err)
 			}
-			ret <- event
+			chie <- event
 		}
 	}()
 	return nil
